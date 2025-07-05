@@ -17,12 +17,19 @@ export default function GyroCompass() {
     for (let i = 0; i < 360; i += 5) {
       const isMajor = i % 10 === 0;
       const isVeryMajor = i % 30 === 0;
+      const angle = i * (Math.PI / 180);
+      const radius = 155;
+      const x = Math.sin(angle) * radius;
+      const y = -Math.cos(angle) * radius;
+      
       markings.push(
         <div
           key={i}
-          className={`degree-marking ${isVeryMajor ? 'major-marking' : isMajor ? 'medium-marking' : 'minor-marking'}`}
+          className={`absolute ${isVeryMajor ? 'major-marking' : isMajor ? 'medium-marking' : 'minor-marking'} bg-slate-700`}
           style={{
-            transform: `rotate(${i}deg) translateY(-165px)`,
+            left: '50%',
+            top: '50%',
+            transform: `translate(${x}px, ${y}px) translate(-50%, 0) rotate(${i}deg)`,
           }}
         />
       );
@@ -170,28 +177,17 @@ export default function GyroCompass() {
                   </div>
                 </div>
                 
-                {/* Inner Degree Numbers - showing actual heading values */}
+                {/* Inner Numbers (simple 1-9 pattern like original) */}
                 <div className="absolute inset-0">
-                  {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((degree) => {
-                    const angle = degree;
-                    const radius = 105;
-                    const x = Math.sin((angle * Math.PI) / 180) * radius;
-                    const y = -Math.cos((angle * Math.PI) / 180) * radius;
-                    
-                    return (
-                      <div
-                        key={degree}
-                        className="absolute text-slate-800 font-mono text-sm font-bold"
-                        style={{
-                          left: '50%',
-                          top: '50%',
-                          transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`,
-                        }}
-                      >
-                        {degree.toString().padStart(3, '0')}
-                      </div>
-                    );
-                  })}
+                  <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-slate-800 font-mono text-lg font-bold">1</div>
+                  <div className="absolute top-16 right-12 transform text-slate-800 font-mono text-lg font-bold">2</div>
+                  <div className="absolute top-1/2 right-8 transform -translate-y-1/2 text-slate-800 font-mono text-lg font-bold">3</div>
+                  <div className="absolute bottom-16 right-12 transform text-slate-800 font-mono text-lg font-bold">4</div>
+                  <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-slate-800 font-mono text-lg font-bold">5</div>
+                  <div className="absolute bottom-16 left-12 transform text-slate-800 font-mono text-lg font-bold">6</div>
+                  <div className="absolute top-1/2 left-8 transform -translate-y-1/2 text-slate-800 font-mono text-lg font-bold">7</div>
+                  <div className="absolute top-16 left-12 transform text-slate-800 font-mono text-lg font-bold">8</div>
+                  <div className="absolute top-20 left-1/2 transform -translate-x-1/2 text-slate-800 font-mono text-lg font-bold">9</div>
                 </div>
                 
                 {/* Center Hub */}

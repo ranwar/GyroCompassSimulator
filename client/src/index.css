@@ -112,7 +112,9 @@
   .degree-marking {
     position: absolute;
     background: var(--compass-markings);
-    transform-origin: bottom center;
+    transform-origin: center bottom;
+    margin-left: -1.5px;
+    margin-top: -155px;
   }
   
   .major-marking {
@@ -127,7 +129,7 @@
   
   .medium-marking {
     width: 2px;
-    height: 15px;
+    height: 12px;
   }
 }
 
