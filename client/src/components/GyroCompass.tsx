@@ -18,7 +18,7 @@ export default function GyroCompass() {
       const isMajor = i % 10 === 0;
       const isVeryMajor = i % 30 === 0;
       const angle = i * (Math.PI / 180);
-      const radius = 155;
+      const radius = 145;
       const x = Math.sin(angle) * radius;
       const y = -Math.cos(angle) * radius;
       
@@ -42,7 +42,7 @@ export default function GyroCompass() {
     const numbers = [];
     for (let i = 0; i < 360; i += 10) {
       const angle = i;
-      const radius = 175;
+      const radius = 165;
       const x = Math.sin((angle * Math.PI) / 180) * radius;
       const y = -Math.cos((angle * Math.PI) / 180) * radius;
       
@@ -138,43 +138,20 @@ export default function GyroCompass() {
           <div className="relative">
             <div className="compass-housing rounded-full p-8 w-96 h-96 flex items-center justify-center">
               
-              {/* Outer Degree Ring */}
-              <div className="absolute inset-4 rounded-full border-4 border-slate-600">
-                {/* Degree Markings */}
+              {/* Rotating Compass Dial - Everything rotates together */}
+              <div 
+                className="compass-dial rounded-full w-80 h-80 relative transition-transform duration-1000 ease-out"
+                style={{ transform: `rotate(${-currentHeading}deg)` }}
+              >
+                
+                {/* Degree Markings - Now rotating with dial */}
                 <div className="relative w-full h-full">
                   {generateDegreeMarkings()}
                 </div>
                 
-                {/* Degree Numbers - Full 360 degree scale */}
+                {/* Degree Numbers - Now rotating with dial */}
                 <div className="absolute inset-0">
                   {generateDegreeNumbers()}
-                </div>
-              </div>
-              
-              {/* Rotating Compass Dial */}
-              <div 
-                className="compass-dial rounded-full w-72 h-72 relative transition-transform duration-1000 ease-out"
-                style={{ transform: `rotate(${-currentHeading}deg)` }}
-              >
-                
-                {/* Cardinal Directions */}
-                <div className="absolute inset-0">
-                  {/* North */}
-                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="w-8 h-8 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-bold">N</div>
-                  </div>
-                  {/* East */}
-                  <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
-                    <div className="w-8 h-8 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-bold">E</div>
-                  </div>
-                  {/* South */}
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                    <div className="w-8 h-8 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-bold">S</div>
-                  </div>
-                  {/* West */}
-                  <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
-                    <div className="w-8 h-8 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-bold">W</div>
-                  </div>
                 </div>
                 
                 {/* Inner Numbers (simple 1-9 pattern like original) */}
@@ -191,7 +168,7 @@ export default function GyroCompass() {
                 </div>
                 
                 {/* Center Hub */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-slate-800 rounded-full border-4 border-slate-600"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-slate-800 rounded-full"></div>
               </div>
               
               {/* Fixed Bow Pointer/Needle */}
