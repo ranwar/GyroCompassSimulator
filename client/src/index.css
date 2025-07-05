@@ -121,8 +121,13 @@
   }
   
   .minor-marking {
+    width: 1px;
+    height: 8px;
+  }
+  
+  .medium-marking {
     width: 2px;
-    height: 12px;
+    height: 15px;
   }
 }
 
